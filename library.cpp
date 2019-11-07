@@ -1,16 +1,17 @@
 #include <iostream>
-#include "project_1.h"
+#include "project1.h"
 
 using namespace std;
 
 int main() {
 
     Library manage;
-    int option;
+    bool comply = false;
     const char YES = 'Y';
     char ask = YES;
     string title, name;
-    int id, prices;
+    double id, prices;
+    int option;
     cout << "\n*  * Library Database Management System *  *\n";
     cout << "\n--------------------------------------------\n";
 
@@ -28,28 +29,84 @@ int main() {
 
         if (option == 1) {
 
+            comply = false;
+
             cout << "\nTitle: ";
             getline(cin, title);
             cout << "\nAuthor: ";
             getline(cin, name);
-            cout << "\nISBN: ";
-            cin >> id;
-            cout << "\nPrice: ";
-            cin >> prices;
+
+            while (!comply) {
+
+                comply = true;
+                cout << "\nISBN: ";
+                cin >> id;
+
+                if (cin.fail()) {
+
+                    cin.clear();
+                    cin.ignore();
+                    cout << "Invalid input. Try again.";
+                    comply = false;
+                }
+            }
+
+            while (comply) {
+
+                comply = false;
+                cout << "\nPrices: ";
+                cin >> prices;
+
+                if (cin.fail()) {
+
+                    cin.clear();
+                    cin.ignore();
+                    cout << "Invalid input. Try again.";
+                    comply = true;;
+                }
+            }
             manage.addData(title, name, id, prices);
         }
 
         else if (option == 2) {
 
-            cout << "\nEnter the ISBN of the book to delete: ";
-            cin >> id;
+            comply = false;
+
+            while (!comply) {
+
+                comply = true;
+                cout << "\nEnter the ISBN of the book to delete: ";
+                cin >> id;
+
+                if (cin.fail()) {
+
+                    cin.clear();
+                    cin.ignore();
+                    cout << "Invalid input. Try again.";
+                    comply = false;
+                }
+            }
             manage.deleteData(id);
         }
 
         else if (option == 3) {
 
-            cout << "\nSearch for the book by entering the ID: ";
-            cin >> id;
+            comply = false;
+
+            while (!comply) {
+
+                comply = true;
+                cout << "\nSearch for the book by entering the ID: ";
+                cin >> id;
+
+                if (cin.fail()) {
+
+                    cin.clear();
+                    cin.ignore();
+                    cout << "Invalid input. Try again.";
+                    comply = false;
+                }
+            }
             manage.searchData(id);
         }
 
