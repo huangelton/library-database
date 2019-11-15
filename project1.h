@@ -1,14 +1,10 @@
-#include <string>
-
-using namespace std;
-
 class Library {
 
     private:
         struct Node {
-            string bookTitle;
-            string authorName;
-            double ID;
+            std::string bookTitle;
+            std::string authorName;
+            long ID;
             double price;
             Node *next;
         };
@@ -19,10 +15,11 @@ class Library {
         ~Library();
         Library(const Library &objList);
         Library & operator=(const Library &objList);
-        void addData(string, string, double, double);   
-        void searchData(int);
-        void deleteData(int);
+        void addData(std::string, std::string, long, double);   
+        bool searchData(long);
+        void deleteData(long);
         void deleteItem();
         int getTotalBooks();
         void displayList() const;
+        void checkError();
 };

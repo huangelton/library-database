@@ -11,28 +11,28 @@ Library::Library() {
 
 Library::~Library() {
 
-    Node *nodePtr;
-    Node *newNode;
-    nodePtr = head;
+    Node* nPtr;
+    Node* newNode;
+    nPtr = head;
     
-    while (nodePtr) {
+    while (nPtr) {
 
-        newNode = nodePtr->next;
-        delete nodePtr;
-        nodePtr = newNode;
+        newNode = nPtr->next;
+        delete nPtr;
+        nPtr = newNode;
     }
     head = nullptr;
 }
 
 Library::Library(const Library &objList) {
     
-    Node * nodePtr = objList.head;
+    Node* nPtr = objList.head;
     head = nullptr;
     
-    while (nodePtr != nullptr) {
+    while (nPtr != nullptr) {
         
-        addData(nodePtr->bookTitle, nodePtr->authorName, nodePtr->ID, nodePtr->price);
-        nodePtr = nodePtr->next;
+        addData(nPtr->bookTitle, nPtr->authorName, nPtr->ID, nPtr->price);
+        nPtr = nPtr->next;
     }
 }
 
@@ -47,12 +47,12 @@ Library & Library::operator=(const Library &objList) {
 
         deleteItem();
     }
-    Node *nodePtr = objList.head;
+    Node* nPtr = objList.head;
 
-    while (nodePtr != nullptr) {
+    while (nPtr != nullptr) {
         
-        addData(nodePtr->bookTitle, nodePtr->authorName, nodePtr->ID, nodePtr->price);
-        nodePtr = nodePtr->next;
+        addData(nPtr->bookTitle, nPtr->authorName, nPtr->ID, nPtr->price);
+        nPtr = nPtr->next;
     }
     return *this;
 }
@@ -64,15 +64,16 @@ void Library::deleteItem() {
     head = temp;
 }
 
-void Library::addData(string book, string author, double num, double cost) {
+void Library::addData(string book, string author, long num, double cost) {
 
-    Node *prevPtr;
-    Node *nodePtr;
-    Node *newNode = new Node;
+    Node* prevPtr;
+    Node* nPtr;
+    Node* newNode = new Node;
     newNode->bookTitle = book;
     newNode->authorName = author;
     newNode->ID = num;
     newNode->price = cost;
+    newNode->next = nullptr;
     
     if (head == nullptr) {
 
@@ -83,57 +84,51 @@ void Library::addData(string book, string author, double num, double cost) {
     else {
 
         prevPtr = nullptr;
-        nodePtr = head;
+        nPtr = head;
 
-        while (nodePtr != nullptr) {
+        while (nPtr != nullptr) {
 
-            prevPtr = nodePtr;
-            nodePtr = nodePtr->next;
+            prevPtr = nPtr;
+            nPtr = nPtr->next;
         }
 
         if (prevPtr == nullptr) {
 
-            head = nodePtr;
-            newNode->next = nodePtr;
+            head = nPtr;
+            newNode->next = nPtr;
         }
 
         else {
 
             prevPtr->next = newNode;
-            newNode->next = nodePtr;
+            newNode->next = nPtr;
         }
     }    
 }
 
-void Library::searchData(int num) {
+bool Library::searchData(long num) {
 
-    Node *nodePtr;
-    int locate = 0;
-    nodePtr = head;
+    Node* nPtr;
+    nPtr = head;
 
-    while (nodePtr != nullptr) {
+    while (nPtr != nullptr) {
 
-        locate++;
+        if (nPtr->ID == num) {
 
-        if (nodePtr->ID == num) {
-
-            cout << endl << nodePtr->bookTitle << " by " 
-            << nodePtr->authorName << " is in the library database." << endl;
-            exit(1);
+            cout << endl << nPtr->bookTitle << " by " 
+            << nPtr->authorName << " is in the library database.\n";
+            return true;
         }
-
-        else {
-
-            nodePtr = nodePtr->next;
-        }
+        nPtr = nPtr->next;
     }
-    cout << endl << "The book is not found in the library database.\n";
+    cout << "\nThe book is not found in the library database.\n";
+    return false;
 }
 
-void Library::deleteData(int num) {
+void Library::deleteData(long num) {
 
-    Node *nodePtr;
-    Node *prevPtr;
+    Node* nPtr;
+    Node* prevPtr;
 
     if (!head)
 
@@ -141,24 +136,24 @@ void Library::deleteData(int num) {
     
     if (head->ID == num) {
 
-        nodePtr = head->next;
+        nPtr = head->next;
         delete head;
-        head = nodePtr;
+        head = nPtr;
     }
 
     else {
 
-        nodePtr = head;
+        nPtr = head;
 
-        while (nodePtr != nullptr && nodePtr->ID != num) {
+        while (nPtr != nullptr && nPtr->ID != num) {
 
-            prevPtr = nodePtr;
-            nodePtr = nodePtr->next;
+            prevPtr = nPtr;
+            nPtr = nPtr->next;
         }
 
-        if (nodePtr) {
+        if (nPtr) {
 
-            prevPtr->next = nodePtr->next;
+            prevPtr->next = nPtr->next;
             delete prevPtr;
         }
     }
@@ -166,29 +161,29 @@ void Library::deleteData(int num) {
 
 int Library::getTotalBooks() {
 
-    Node *nodePtr = head;
+    Node* nPtr = head;
     int total = 0;
 
-    while (nodePtr != nullptr) {
+    while (nPtr != nullptr) {
 
         total++;
-        nodePtr = nodePtr->next;
+        nPtr = nPtr->next;
     }
     return total;
 }
 
 void Library::displayList() const {
 
-    Node *nodePtr = head;
+    Node* nPtr = head;
     cout << endl;
     cout << left << setw(26) << "Book Title" << setw(22) << 
     "Author" << setw(19) << "ISBN" << setw(17) << "Price($)" << endl;
 
-    while (nodePtr != nullptr) {
+    while (nPtr != nullptr) {
 
-        cout << left << setw(26) << nodePtr->bookTitle << setw(22) 
-        << nodePtr->authorName << setw(19) << nodePtr->ID 
-        << setw(17) << nodePtr->price << endl;
-        nodePtr = nodePtr->next;
+        cout << left << setw(26) << nPtr->bookTitle << setw(22) 
+        << nPtr->authorName << setw(19) << nPtr->ID 
+        << setw(17) << nPtr->price << endl;
+        nPtr = nPtr->next;
     }
 }

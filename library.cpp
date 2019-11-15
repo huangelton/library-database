@@ -6,11 +6,12 @@ using namespace std;
 int main() {
 
     Library manage;
-    bool comply = false;
     const char YES = 'Y';
+    bool comply = false;
     char ask = YES;
     string title, name;
-    double id, prices;
+    long id;
+    double prices;
     int option;
     cout << "\n*  * Library Database Management System *  *\n";
     cout << "\n--------------------------------------------\n";
@@ -22,97 +23,63 @@ int main() {
         cout << "(2) Delete a book by ISBN\n";
         cout << "(3) Search for a book by ISBN\n";
         cout << "(4) Display all books\n";
-        cout << "(5) Exit the library database\n";
-        cout << "\nChoose an option (1-5): ";
+        cout << "(5) Display number of books\n";
+        cout << "(6) Exit the library database\n";
+        cout << "\nChoose an option (1-6): ";
         cin >> option;
         cin.ignore();
 
         if (option == 1) {
 
-            comply = false;
-
             cout << "\nTitle: ";
             getline(cin, title);
             cout << "\nAuthor: ";
             getline(cin, name);
-
-            while (!comply) {
-
-                comply = true;
-                cout << "\nISBN: ";
-                cin >> id;
-
-                if (cin.fail()) {
-
-                    cin.clear();
-                    cin.ignore();
-                    cout << "Invalid input. Try again.";
-                    comply = false;
-                }
-            }
-
-            while (comply) {
-
-                comply = false;
-                cout << "\nPrices: ";
-                cin >> prices;
-
-                if (cin.fail()) {
-
-                    cin.clear();
-                    cin.ignore();
-                    cout << "Invalid input. Try again.";
-                    comply = true;;
-                }
-            }
+            cout << "\nISBN: ";
+            cin >> id;
+            cout << "\nPrices: ";
+            cin >> prices;
             manage.addData(title, name, id, prices);
+            cout << "\nThe book has now been added to the library database.\n";
         }
-
+                
         else if (option == 2) {
 
-            comply = false;
+            cout << "\nEnter the ISBN of the book to remove: ";
+            cin >> id;
+            
+            if (manage.searchData(id)) {
 
-            while (!comply) {
-
-                comply = true;
-                cout << "\nEnter the ISBN of the book to delete: ";
-                cin >> id;
-
-                if (cin.fail()) {
-
-                    cin.clear();
-                    cin.ignore();
-                    cout << "Invalid input. Try again.";
-                    comply = false;
-                }
+                manage.deleteData(id);
+                cout << "The book has been deleted.\n";
             }
-            manage.deleteData(id);
         }
 
         else if (option == 3) {
 
-            comply = false;
-
-            while (!comply) {
-
-                comply = true;
-                cout << "\nSearch for the book by entering the ID: ";
-                cin >> id;
-
-                if (cin.fail()) {
-
-                    cin.clear();
-                    cin.ignore();
-                    cout << "Invalid input. Try again.";
-                    comply = false;
-                }
-            }
+            cout << "\nSearch for the book by entering the ISBN: ";
+            cin >> id;
             manage.searchData(id);
         }
 
         else if (option == 4) {
 
             manage.displayList();
+        }
+
+        else if (option == 5) {
+
+            int total = manage.getTotalBooks();
+
+            if (total == 1) {
+
+                cout << "\nThere is currently a total of " << total << " book in the database.\n";
+            }
+
+            else {
+
+                cout << "\nThere is currently a total of " << total << " books in the database.\n";
+            }
         }
 
         else {
@@ -126,6 +93,6 @@ int main() {
         
     } while (ask == 'Y' || ask == 'y');
 
-    cout << "\n\nExiting out of the database.\n";
+    cout << "\nExiting out of the library database.\n";
     return 0;
 }
