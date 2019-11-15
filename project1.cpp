@@ -37,15 +37,12 @@ Library::Library(const Library &objList) {
 }
 
 Library & Library::operator=(const Library &objList) {
-
-    if (this == &objList) {
-
-        return *this;
-    }
     
     while (head != nullptr) {
 
-        deleteItem();
+        Node* temp = head->next;
+        delete head;
+        head = temp;
     }
     Node* nPtr = objList.head;
 
@@ -55,13 +52,6 @@ Library & Library::operator=(const Library &objList) {
         nPtr = nPtr->next;
     }
     return *this;
-}
-
-void Library::deleteItem() {
-    
-    Node* temp = temp->next;
-    delete head;
-    head = temp;
 }
 
 void Library::addData(string book, string author, long num, double cost) {

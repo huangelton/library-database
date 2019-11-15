@@ -7,7 +7,6 @@ int main() {
 
     Library manage;
     const char YES = 'Y';
-    bool comply = false;
     char ask = YES;
     string title, name;
     long id;
@@ -22,8 +21,8 @@ int main() {
         cout << "\n(1) Add a book to the database\n";
         cout << "(2) Delete a book by ISBN\n";
         cout << "(3) Search for a book by ISBN\n";
-        cout << "(4) Display all books\n";
-        cout << "(5) Display number of books\n";
+        cout << "(4) View list of books\n";
+        cout << "(5) Display total number of books\n";
         cout << "(6) Exit the library database\n";
         cout << "\nChoose an option (1-6): ";
         cin >> option;
@@ -76,9 +75,14 @@ int main() {
                 cout << "\nThere is currently a total of " << total << " book in the database.\n";
             }
 
-            else {
+            else if (total > 1) {
 
                 cout << "\nThere is currently a total of " << total << " books in the database.\n";
+            }
+
+            else {
+
+                cout <<"\nThe catalog is currently empty.\n";
             }
         }
 
