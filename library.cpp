@@ -11,7 +11,7 @@ int main() {
     string title, name;
     long id;
     double prices;
-    int option;
+    int option, total;
     cout << "\n*  * Library Database Management System *  *\n";
     cout << "\n--------------------------------------------\n";
 
@@ -27,68 +27,70 @@ int main() {
         cout << "\nChoose an option (1-6): ";
         cin >> option;
         cin.ignore();
+        
+        switch(option) {
 
-        if (option == 1) {
+            case 1:
 
-            cout << "\nTitle: ";
-            getline(cin, title);
-            cout << "\nAuthor: ";
-            getline(cin, name);
-            cout << "\nISBN: ";
-            cin >> id;
-            cout << "\nPrices: ";
-            cin >> prices;
-            manage.addData(title, name, id, prices);
-            cout << "\nThe book has now been added to the library database.\n";
-        }
+                cout << "\nTitle: ";
+                getline(cin, title);
+                cout << "\nAuthor: ";
+                getline(cin, name);
+                cout << "\nISBN: ";
+                cin >> id;
+                cout << "\nPrices: ";
+                cin >> prices;
+                manage.addData(title, name, id, prices);
+                cout << "\nThe book has now been added to the library database.\n";
+                break;
                 
-        else if (option == 2) {
+            case 2:
 
-            cout << "\nEnter the ISBN of the book to remove: ";
-            cin >> id;
+                cout << "\nEnter the ISBN of the book to remove: ";
+                cin >> id;
             
-            if (manage.searchData(id)) {
+                if (manage.searchData(id)) {
 
-                manage.deleteData(id);
-                cout << "The book has been deleted.\n";
-            }
-        }
+                    manage.deleteData(id);
+                    cout << "The book has been deleted.\n";
+                }
+                break;
 
-        else if (option == 3) {
+            case 3: 
 
-            cout << "\nSearch for the book by entering the ISBN: ";
-            cin >> id;
-            manage.searchData(id);
-        }
+                cout << "\nSearch for the book by entering the ISBN: ";
+                cin >> id;
+                manage.searchData(id);
+                break;
 
-        else if (option == 4) {
+            case 4:
 
-            manage.displayList();
-        }
+                manage.displayList();
+                break;
 
-        else if (option == 5) {
+            case 5: 
 
-            int total = manage.getTotalBooks();
+                total = manage.getTotalBooks();
 
-            if (total == 1) {
+                if (total == 1) {
 
-                cout << "\nThere is currently a total of " << total << " book in the database.\n";
-            }
+                    cout << "\nThere is currently a total of " << total << " book in the database.\n";
+                }
 
-            else if (total > 1) {
+                else if (total > 1) {
 
-                cout << "\nThere is currently a total of " << total << " books in the database.\n";
-            }
+                    cout << "\nThere is currently a total of " << total << " books in the database.\n";
+                }
 
-            else {
+                else {
 
-                cout <<"\nThe catalog is currently empty.\n";
-            }
-        }
+                    cout <<"\nThe catalog is currently empty.\n";
+                }
+                break;
 
-        else {
+            default:
 
-            break;
+                break;
         }
         cout << endl;
         cout << "\nDo you want to manage the library database again? (y/n): ";
