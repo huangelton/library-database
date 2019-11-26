@@ -9,6 +9,3 @@ This program requires no additional packages to install. Therefore, you only nee
 
 ### Note
 This specific project does not use mySQL for implementation and design patterns.
-
-### Lisence
-Copyright (c) 2019-present, elton_h
