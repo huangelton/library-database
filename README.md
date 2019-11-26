@@ -6,3 +6,9 @@ The library database has useful features that allows the user to store and find 
 
 # How to run
 This program requires no additional packages to install. Therefore, you only need to compile and execute the C++ program.
+
+# Note
+This specific program does not use mySQL for implementation and/or design patterns.
+
+# Lisence
+Copyright (c) 2019-present, elton_h
