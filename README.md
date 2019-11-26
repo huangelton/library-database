@@ -5,4 +5,4 @@ A Library Database System implemented using simple concepts of object-oriented p
 The library database has useful features that allows the user to store and find information about books such as inserting, removing, and searching through the database. This was implemented using linked lists and classes.
 
 # How to run
-This program requires no additional packages to install. Therefore, you only need to compile and run.
+This program requires no additional packages to install. Therefore, you only need to compile and execute the C++ program.
