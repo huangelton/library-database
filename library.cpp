@@ -1,36 +1,36 @@
 #include <iostream>
-#include "project1.h"
+#include "system.h"
 
 using namespace std;
 
 int main() {
 
-    Library manage;
-    const char YES = 'Y';
+    Library manage; // creates class object
+    const char YES = 'Y'; 
     char ask = YES;
-    string title, name;
-    long id;
-    double prices;
+    string title, name; // book title and author's name
+    long id; // ISBN
+    double prices; // book price
     int option, total;
     cout << "\n*  * Library Database Management System *  *\n";
     cout << "\n--------------------------------------------\n";
 
-    do {
+    do { // do-while loop to re-modify the database
 
         cout << "\nMenu: Select your option\n";
         cout << "\n(1) Add a book to the database\n";
         cout << "(2) Delete a book by ISBN\n";
         cout << "(3) Search for a book by ISBN\n";
-        cout << "(4) View list of books\n";
-        cout << "(5) Display total number of books\n";
+        cout << "(4) Display list of books\n";
+        cout << "(5) View total book(s)\n";
         cout << "(6) Exit the library database\n";
         cout << "\nChoose an option (1-6): ";
-        cin >> option;
+        cin >> option; // choose option from 1-6
         cin.ignore();
         
-        switch(option) {
+        switch(option) { // switch statement for readability
 
-            case 1:
+            case 1: // add book to system
 
                 cout << "\nTitle: ";
                 getline(cin, title);
@@ -44,7 +44,7 @@ int main() {
                 cout << "\nThe book has now been added to the library database.\n";
                 break;
                 
-            case 2:
+            case 2: // remove book from system
 
                 cout << "\nEnter the ISBN of the book to remove: ";
                 cin >> id;
@@ -56,19 +56,19 @@ int main() {
                 }
                 break;
 
-            case 3: 
+            case 3: // Searches a book based on ISBN
 
                 cout << "\nSearch for the book by entering the ISBN: ";
                 cin >> id;
                 manage.searchData(id);
                 break;
 
-            case 4:
+            case 4: // display entire library catalog
 
                 manage.displayList();
                 break;
 
-            case 5: 
+            case 5: // View total number books
 
                 total = manage.getTotalBooks();
 
@@ -84,21 +84,21 @@ int main() {
 
                 else {
 
-                    cout <<"\nThe catalog is currently empty.\n";
+                    cout <<"\nThe database is currently empty.\n";
                 }
                 break;
 
-            default:
+            default: // exits out of database
 
-                break;
+                cout << "\nExiting out of the library database.\n";
+                exit(1);
         }
         cout << endl;
         cout << "\nDo you want to manage the library database again? (y/n): ";
         cin >> ask;
         cout << endl;
         
-    } while (ask == 'Y' || ask == 'y');
+    } while (ask == 'Y' || ask == 'y'); // runs again if input is Y or y
 
-    cout << "\nExiting out of the library database.\n";
     return 0;
-}
+} // end of program
