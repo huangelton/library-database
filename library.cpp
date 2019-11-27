@@ -68,17 +68,17 @@ int main() {
             
             case 4: // save data to a file
 
-                cout << "Enter a filename: ";
+                cout << "\nEnter a filename: ";
                 cin >> choose;
 
                 if (fstream(choose)) { // runs if file exists
 
-                    cout << "Overwriting '" << choose << "' file.\n";
+                    cout << "\nOverwriting '" << choose << "' file.\n";
                 }
 
                 else { // new file
 
-                    cout << "Creating '" << choose << "' file.\n";
+                    cout << "\nCreating '" << choose << "' file.\n";
                 }
                 manage.saveFile(choose); // writes to file
                 break;
