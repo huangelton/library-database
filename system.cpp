@@ -120,9 +120,10 @@ void Library::deleteData(long num) { // delete function
     Node* nPtr;
     Node* prevPtr;
 
-    if (!head) // empty list
+    if (!head) { // empty list
 
         return;
+    }
     
     if (head->ID == num) {
 
@@ -178,3 +179,6 @@ void Library::displayList() const { // display function
         nPtr = nPtr->next;
     }
 }
+
+
+
