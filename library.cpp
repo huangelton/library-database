@@ -22,7 +22,7 @@ int main() {
         cout << "(2) Delete a book by ISBN\n";
         cout << "(3) Search for a book by ISBN\n";
         cout << "(4) Display list of books\n";
-        cout << "(5) View total book(s)\n";
+        cout << "(5) View number of book(s)\n";
         cout << "(6) Exit the library database\n";
         cout << "\nChoose an option (1-6): ";
         cin >> option; // choose option from 1-6
@@ -74,7 +74,7 @@ int main() {
 
                 if (total == 1) {
 
-                    cout << "\nThere is currently a total of " << total << " book in the database.\n";
+                    cout << "\nThere is currently " << total << " book in the database.\n";
                 }
 
                 else if (total > 1) {
