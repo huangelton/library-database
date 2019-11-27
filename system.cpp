@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <fstream>
 #include "system.h"
 
 using namespace std;
@@ -124,7 +125,7 @@ void Library::deleteData(long num) { // delete function
 
         return;
     }
-    
+
     if (head->ID == num) {
 
         nPtr = head->next;
@@ -180,5 +181,19 @@ void Library::displayList() const { // display function
     }
 }
 
+void Library::saveFile(string choose) {
 
+    Node* nPtr = head;
+    ofstream file;
+    file.open(choose);
 
+    while (nPtr != nullptr) {
+
+        file << nPtr->bookTitle << " ";
+        file << nPtr->authorName << " ";
+        file << nPtr->ID << " ";
+        file << nPtr->price << endl;
+        nPtr = nPtr->next;
+    }
+    file.close();
+}

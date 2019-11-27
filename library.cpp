@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "system.h"
 
 using namespace std;
@@ -12,6 +13,7 @@ int main() {
     long id; // ISBN
     double prices; // book price
     int option, total;
+    string choose;
     cout << "\n*  * Library Database Management System *  *\n";
     cout << "\n--------------------------------------------\n";
 
@@ -21,11 +23,12 @@ int main() {
         cout << "\n(1) Add a book to the database\n";
         cout << "(2) Delete a book by ISBN\n";
         cout << "(3) Search for a book by ISBN\n";
-        cout << "(4) Display list of books\n";
-        cout << "(5) View number of book(s)\n";
-        cout << "(6) Exit the library database\n";
-        cout << "\nChoose an option (1-6): ";
-        cin >> option; // choose option from 1-6
+        cout << "(4) Save to a file\n";
+        cout << "(5) Display list of books\n";
+        cout << "(6) View number of book(s)\n";
+        cout << "(7) Exit the library database\n";
+        cout << "\nChoose an option (1-7): ";
+        cin >> option; // choose option from 1-7
         cin.ignore();
         
         switch(option) { // switch statement for readability
@@ -56,25 +59,42 @@ int main() {
                 }
                 break;
 
-            case 3: // Searches a book based on ISBN
+            case 3: // searches a book based on ISBN
 
                 cout << "\nSearch for the book by entering the ISBN: ";
                 cin >> id;
                 manage.searchData(id);
                 break;
+            
+            case 4: // save data to a file
 
-            case 4: // display entire library catalog
+                cout << "Enter a filename: ";
+                cin >> choose;
+
+                if (fstream(choose)) { // runs if file exists
+
+                    cout << "Overwriting '" << choose << "' file.\n";
+                }
+
+                else { // new file
+
+                    cout << "Creating '" << choose << "' file.\n";
+                }
+                manage.saveFile(choose); // writes to file
+                break;
+
+            case 5: // display entire library catalog
 
                 manage.displayList();
                 break;
 
-            case 5: // View total number books
+            case 6: // view total number books
 
                 total = manage.getTotalBooks();
 
                 if (total == 1) {
 
-                    cout << "\nThere is currently " << total << " book in the database.\n";
+                    cout << "\nThere is currently a total of " << total << " book in the database.\n";
                 }
 
                 else if (total > 1) {
@@ -102,6 +122,3 @@ int main() {
 
     return 0;
 } // end of program
-
-
-
