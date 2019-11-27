@@ -40,6 +40,13 @@ class Library {
         void displayList() const; // display list
         // precondition: none
         // postcondition: none
+        
+        void saveFile(std::string);
+        // precondition: valid string
+        // postcondition: none
 };
+
+
+
 
 
