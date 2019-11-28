@@ -12,7 +12,7 @@ int main() {
     string title, name; // book title and author's name
     long id; // ISBN
     double prices; // book price
-    int option, total;
+    int option;
     string choose;
     cout << "\n*  * Library Database Management System *  *\n";
     cout << "\n--------------------------------------------\n";
@@ -25,9 +25,8 @@ int main() {
         cout << "(3) Search for a book by ISBN\n";
         cout << "(4) Save to a file\n";
         cout << "(5) Display list of books\n";
-        cout << "(6) View number of book(s)\n";
-        cout << "(7) Exit the library database\n";
-        cout << "\nChoose an option (1-7): ";
+        cout << "(6) Exit the library database\n";
+        cout << "\nChoose an option (1-6): ";
         cin >> option; // choose option from 1-7
         cin.ignore();
         
@@ -41,7 +40,7 @@ int main() {
                 getline(cin, name);
                 cout << "\nISBN: ";
                 cin >> id;
-                cout << "\nPrices: ";
+                cout << "\nPrice($): ";
                 cin >> prices;
                 manage.addData(title, name, id, prices);
                 cout << "\nThe book has now been added to the library database.\n";
@@ -49,21 +48,22 @@ int main() {
                 
             case 2: // remove book from system
 
-                cout << "\nEnter the ISBN of the book to remove: ";
+                cout << "\nEnter the ISBN of the book: ";
                 cin >> id;
             
                 if (manage.searchData(id)) {
 
                     manage.deleteData(id);
-                    cout << "The book has been deleted.\n";
+                    cout << "\nThe book has been deleted.\n";
                 }
                 break;
 
             case 3: // searches a book based on ISBN
 
-                cout << "\nSearch for the book by entering the ISBN: ";
+                cout << "\nEnter the ISBN of the book: ";
                 cin >> id;
-                manage.searchData(id);
+                cout << endl;
+                manage.displayBook(id);
                 break;
             
             case 4: // save data to a file
@@ -85,32 +85,20 @@ int main() {
 
             case 5: // display entire library catalog
 
-                manage.displayList();
-                break;
+                if (manage.checkEmpty()) { // check if empty
 
-            case 6: // view total number books
-
-                total = manage.getTotalBooks();
-
-                if (total == 1) {
-
-                    cout << "\nThere is currently a total of " << total << " book in the database.\n";
+                    cout << "\nThe library catalog is currently empty.\n";
                 }
 
-                else if (total > 1) {
+                else { // otherwise display library
 
-                    cout << "\nThere is currently a total of " << total << " books in the database.\n";
-                }
-
-                else {
-
-                    cout <<"\nThe database is currently empty.\n";
+                    manage.displayList();
                 }
                 break;
 
             default: // exits out of database
 
-                cout << "\nExiting out of the library database.\n";
+                cout << "\n\nExiting out of the library database.\n\n";
                 exit(1);
         }
         cout << endl;

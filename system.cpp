@@ -106,8 +106,6 @@ bool Library::searchData(long num) { // search function
 
         if (nPtr->ID == num) { // run this if num is found
 
-            cout << endl << nPtr->bookTitle << " by " 
-            << nPtr->authorName << " is in the library database.\n";
             return true;
         }
         nPtr = nPtr->next; // next node
@@ -151,34 +149,33 @@ void Library::deleteData(long num) { // delete function
     }
 }
 
-int Library::getTotalBooks() { // finds total number of books
+void Library::displayList() { // display function
 
     Node* nPtr = head;
-    int total = 0; // set to zero
-
-    while (nPtr != nullptr) {
-
-        total++; // increments total
-        nPtr = nPtr->next;
-    }
-    return total; // return total books
-}
-
-void Library::displayList() const { // display function
-
-    Node* nPtr = head;
-    cout << endl;
     // shows readable interface
-    cout << left << setw(26) << "Book Title" << setw(22) << 
-    "Author" << setw(19) << "ISBN" << setw(17) << "Price($)" << endl;
-    
+
     while (nPtr != nullptr) { // while list not empty
 
-        cout << left << setw(26) << nPtr->bookTitle << setw(22) 
-        << nPtr->authorName << setw(19) << nPtr->ID 
-        << setw(17) << nPtr->price << endl;
+        cout << "\nTitle: " << nPtr->bookTitle;
+        cout << "\nAuthor: " << nPtr->authorName;
+        cout << "\nISBN: " << nPtr->ID;
+        cout << "\nPrice($): " << nPtr->price;
+        cout << endl;
         nPtr = nPtr->next;
     }
+}
+
+void Library::displayBook(long num) {
+
+  Node* nPtr = head;  
+
+  if (searchData(num)) {
+
+    cout << "Title: " << nPtr->bookTitle << endl;
+    cout << "Authors: " << nPtr->authorName << endl;
+    cout << "ISBN: " << nPtr->ID << endl;
+    cout << "Price($): " << nPtr->price;
+  }
 }
 
 void Library::saveFile(string choose) {
@@ -198,5 +195,7 @@ void Library::saveFile(string choose) {
     file.close();
 }
 
+bool Library::checkEmpty() {
 
-
+    return head == nullptr;
+}
