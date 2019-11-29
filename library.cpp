@@ -48,7 +48,7 @@ int main() {
                 
             case 2: // remove book from system
 
-                cout << "\nEnter the ISBN of the book: ";
+                cout << "\nEnter the ISBN of the book you want to delete: ";
                 cin >> id;
             
                 if (manage.searchData(id)) {
@@ -60,7 +60,7 @@ int main() {
 
             case 3: // searches a book based on ISBN
 
-                cout << "\nEnter the ISBN of the book: ";
+                cout << "\nEnter the ISBN of the book you want to search: ";
                 cin >> id;
                 cout << endl;
                 manage.displayBook(id);
