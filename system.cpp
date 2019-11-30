@@ -110,7 +110,6 @@ bool Library::searchData(long num) { // search function
         }
         nPtr = nPtr->next; // next node
     }
-    cout << "\nThe book is not found in the library database.\n";
     return false;
 }
 
@@ -157,9 +156,7 @@ void Library::displayList() { // display function
     while (nPtr != nullptr) { // while list not empty
 
         cout << "\nTitle: " << nPtr->bookTitle;
-        cout << "\nAuthor: " << nPtr->authorName;
         cout << "\nISBN: " << nPtr->ID;
-        cout << "\nPrice($): " << nPtr->price;
         cout << endl;
         nPtr = nPtr->next;
     }

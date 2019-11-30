@@ -42,13 +42,22 @@ int main() {
                 cin >> id;
                 cout << "\nPrice($): ";
                 cin >> prices;
-                manage.addData(title, name, id, prices);
-                cout << "\nThe book has now been added to the library database.\n";
+
+                if (manage.searchData(id)) { // check if book exists
+
+                    cout << "\nThe book already exists in the library database.\n";
+                }
+
+                else {
+
+                    manage.addData(title, name, id, prices);
+                    cout << "\nThe book has now been added to the library database.\n";
+                }
                 break;
                 
             case 2: // remove book from system
 
-                cout << "\nEnter the ISBN of the book you want to delete: ";
+                cout << "\nEnter the ISBN of the book: ";
                 cin >> id;
             
                 if (manage.searchData(id)) {
@@ -56,14 +65,28 @@ int main() {
                     manage.deleteData(id);
                     cout << "\nThe book has been deleted.\n";
                 }
+
+                else {
+
+                    cout << "\nThe book is not found in the library database.\n";
+                }
                 break;
 
             case 3: // searches a book based on ISBN
 
-                cout << "\nEnter the ISBN of the book you want to search: ";
+                cout << "\nEnter the ISBN of the book: ";
                 cin >> id;
                 cout << endl;
-                manage.displayBook(id);
+
+                if (manage.searchData(id)) {
+
+                    manage.displayBook(id);
+                }
+                
+                else {
+
+                    cout << "\nThe book is not found in the library database.\n";
+                }
                 break;
             
             case 4: // save data to a file
@@ -83,11 +106,11 @@ int main() {
                 manage.saveFile(choose); // writes to file
                 break;
 
-            case 5: // display entire library catalog
+            case 5: // display entire library database
 
                 if (manage.checkEmpty()) { // check if empty
 
-                    cout << "\nThe library catalog is currently empty.\n";
+                    cout << "\nThe library database is currently empty.\n";
                 }
 
                 else { // otherwise display library
