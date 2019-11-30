@@ -50,7 +50,7 @@ int main() {
 
                 else {
 
-                    manage.addData(title, name, id, prices);
+                    manage.addData(title, name, id, prices); // insert data to library
                     cout << "\nThe book has now been added to the library database.\n";
                 }
                 break;
@@ -62,11 +62,11 @@ int main() {
             
                 if (manage.searchData(id)) {
 
-                    manage.deleteData(id);
+                    manage.deleteData(id); // remove book from library
                     cout << "\nThe book has been deleted.\n";
                 }
 
-                else {
+                else { // book data not found
 
                     cout << "\nThe book is not found in the library database.\n";
                 }
@@ -79,7 +79,7 @@ int main() {
                 cout << endl;
 
                 if (manage.searchData(id)) {
-
+                    // display book information 
                     manage.displayBook(id);
                 }
                 
