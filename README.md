@@ -7,8 +7,8 @@ Includes features that allows the user to store and find information about books
 ### How to Run
 1. Run the following set of commands to grab the repository.
 ```
-git clone https://github.com/huangelton/library-database
-cd library-database
+git clone https://github.com/huangelton/library-file-system
+cd library-file-system
 ```
 2. Run ```library.cpp system.cpp``` to get started.
 
